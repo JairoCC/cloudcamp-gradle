@@ -10,9 +10,11 @@ jobs:
             
             - name: setup java
               uses: actions/setup-java@0f481fcb613427c0f801b606911222b5b6f3083a # version 5.5.0
+              with:
+                distribution: 'temurin' # See 'Supported distributions' for available options
+                java-version: '25'
             
             - name: build app
               run: |
                 chmod +x gradlew
                 ./gradlew tasks
-                
