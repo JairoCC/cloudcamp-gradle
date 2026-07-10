@@ -17,4 +17,5 @@ jobs:
             - name: build app
               run: |
                 chmod +x gradlew
-                ./gradlew tasks
+                # ./gradlew tasks
+                ./gradlew bootJar
