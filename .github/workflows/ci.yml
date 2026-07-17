@@ -28,7 +28,7 @@ jobs:
               env:
                 gh_pat: GITHUB_TOKEN
               run: |
-                echo "${gh_pat}" | docker login -u JairoCC --password-stdin ghcr.io
+                echo "${gh_pat}" | docker login ghcr.io -u JairoCC --password-stdin 
             
             - name: docker push
               run: |
