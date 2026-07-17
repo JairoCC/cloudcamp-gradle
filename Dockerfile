@@ -1,7 +1,7 @@
-FROM amazoncorretto:25-alpine3.21-jdk AS builder
+FROM gradle:9.5.1-jdk25-alpine AS builder
 
 COPY . .
-RUN chmod +x ./gradlew && ./gradlew bootjar
+RUN gradle bootjar
 
 FROM amazoncorretto:25-alpine3.21-jdk AS runner
 
