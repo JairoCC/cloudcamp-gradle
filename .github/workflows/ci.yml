@@ -14,8 +14,23 @@ jobs:
                 distribution: 'temurin' # See 'Supported distributions' for available options
                 java-version: '25'
             
-            - name: build app
+            - name: unit tests
               run: |
                 chmod +x gradlew
                 # ./gradlew tasks
-                ./gradlew bootJar
+                ./gradlew test
+
+            - name: build docker
+              run: |
+                docker build -t ghcr.io/jairocc/cloudcamp-gradle/javamicro:latest .
+            
+            - name: docker login
+              env:
+                gh_pat: GITHUB_TOKEN
+              run: |
+                echo "${gh_pat}" | docker login -u JairoCC --password-stdin ghcr.io
+            
+            - name: docker push
+              run: |
+                docker push ghcr.io/jairocc/cloudcamp-gradle/javamicro:latest
+                
