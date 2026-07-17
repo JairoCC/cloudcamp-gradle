@@ -33,8 +33,15 @@ jobs:
                 username: ${{ github.actor }}
                 password: ${{ github.token }}
 
+            - name: generate tag
+              id: generate_tag
+              run: |
+                tag=$(echo "${{ github.repository }}" | tr "[:upper:]" "[:lower:]")
+                tag="ghcr.io/${tag}/javamicro:latest"
+                echo "TAG=${tag}" >> $GITHUB_OUTPUT
+
             - name: docker build and push
               uses: docker/build-push-action@v7
               with:
                 push: ${{ github.ref_name == 'main' }}
-                tags: ghcr.io/${{ github.repository }}/javamicro:latest
+                tags: ${{ steps.generate_tag.outputs.TAG }}
