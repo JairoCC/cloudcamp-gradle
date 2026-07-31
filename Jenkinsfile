@@ -1,5 +1,8 @@
 node('docker'){
     repository = "JairoCC/cloudcamp-gradle".toLowerCase()
+    stage('init'){
+        sh "sudo apt install openjdk-25-jdk git -y"
+    }
     stage('checkout'){
         checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/JairoCC/cloudcamp-gradle']])
     }
