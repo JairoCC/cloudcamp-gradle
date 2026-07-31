@@ -11,7 +11,7 @@ node('docker'){
             ./gradlew test'''
     }
     stage('build container'){
-        sh "docker build -t ghcr.io/${repository}/gradle-micro:latest"
+        sh "docker build -t ghcr.io/${repository}/gradle-micro:latest ."
     }
     stage('registry login'){
         withCredentials([usernamePassword(credentialsId: 'git-credentials', passwordVariable: 'PAT_TOKEN', usernameVariable: 'GIT_USERNAME')]) {
